@@ -4,20 +4,20 @@ import { Provider } from 'react-redux';
 import './index.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-
-import { CartProvider } from './context/cart.context';
+import { PersistGate } from 'redux-persist/integration/react';
 import { store } from './store/store';
+import { persistor } from './store/store';
 
 const rootElement = document.getElementById('root');
 
 render(
   <React.StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
-          <CartProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
             <App />
-          </CartProvider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   rootElement
